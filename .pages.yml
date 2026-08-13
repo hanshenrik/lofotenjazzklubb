@@ -1,7 +1,7 @@
 media:
-  - name: public-images
+  - name: images
     label: Bilder
-    input: public
+    input: src/images
     output: /
     extensions: [png, jpg, jpeg, webp, svg, gif]
 
