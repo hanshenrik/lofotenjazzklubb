@@ -38,7 +38,7 @@ Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sap
 
 ### Output
 
-![blog placeholder](../../assets/lofoten-jazzklubb.png)
+![blog placeholder](../../assets/images/lofoten-jazzklubb.png)
 
 ## Blockquotes
 
