@@ -1,0 +1,58 @@
+media:
+  - name: public-images
+    label: Bilder
+    input: public
+    output: /
+    extensions: [png, jpg, jpeg, webp, svg, gif]
+
+content:
+  - name: blog
+    label: Nyheter
+    type: collection
+    path: src/content/blog
+    filename: "{primary}-{year}-{month}-{day}.mdx"
+    view:
+      fields: [heroImage, title, pubDate, updatedDate]
+      primary: title
+      sort: [pubDate, title]
+      default:
+        sort: pubDate
+        order: desc
+    fields:
+      - name: title
+        label: Tittel
+        type: string
+        required: true
+        description: "Tittelen vil også bli brukt i URL-en"
+      - name: description
+        label: Beskrivelse
+        type: text
+        required: true
+        options:
+          rows: 2
+          maxLength: 150
+      - name: pubDate
+        label: Publiseringsdato
+        type: date
+        required: true
+        options:
+          time: true
+          format: yyyy-MM-dd HH:mm
+      - name: updatedDate
+        label: Oppdatert
+        type: date
+        options:
+          time: true
+          format: yyyy-MM-dd HH:mm
+      - name: heroImage
+        label: Hovedbilde
+        type: image
+        options:
+          media: public-images
+          path: public
+          extensions: [png, jpg, jpeg, webp, svg, gif]
+
+settings:
+  hide: true
+  content:
+    merge: true
