@@ -15,6 +15,12 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Runners default to UTC. Event and post dates are written as naive local
+    # times ("2026-09-12 20:00", the format PagesCMS saves) and are parsed in the
+    # build machine's zone, so without this a 20:00 concert builds as 20:00 UTC
+    # and renders as 22:00 for Norwegian readers.
+    env:
+      TZ: Europe/Oslo
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v7
