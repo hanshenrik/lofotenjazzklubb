@@ -31,7 +31,7 @@ content:
     path: src/content/authors
     filename: "{primary}.mdx"
     view:
-      fields: [name, image]
+      fields: [image, name]
       primary: name
       sort: [name]
     fields:
@@ -119,7 +119,7 @@ content:
     path: src/content/event
     filename: "{primary}-{year}-{month}-{day}.mdx"
     view:
-      fields: [heroImage, title, pubDate, updatedDate]
+      fields: [heroImage, title, startDate, authors, pubDate, updatedDate]
       primary: title
       sort: [pubDate, title]
       default:
