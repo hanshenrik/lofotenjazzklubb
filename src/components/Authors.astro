@@ -1,6 +1,10 @@
 ---
+interface Author {
+  name: string;
+}
+
 interface Props {
-  authors?: string[];
+  authors?: Author[];
 }
 
 const { authors } = Astro.props;
@@ -9,7 +13,13 @@ const { authors } = Astro.props;
 {
   authors?.length ? (
     <div class="text-sm text-gray-600">
-      Forfatter{authors.length > 1 ? "e" : ""}: {authors.join(", ")}
+      Forfatter{authors.length > 1 ? "e" : ""}:
+      {authors.map((author, index) => (
+        <>
+          {index > 0 && ", "}
+          {author.name}
+        </>
+      ))}
     </div>
   ) : null
 }

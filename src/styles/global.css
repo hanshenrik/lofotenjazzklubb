@@ -111,9 +111,9 @@ a:not(.no-hover-effect).no-underline:focus::before {
 a:not(.no-hover-effect).no-underline[aria-current="page"]:not(:hover)::before {
   background: linear-gradient(
     to right,
-    var(--color-blue-700) 40%,
-    var(--color-blue-500) 40% 70%,
-    var(--color-blue-400) 70%
+    var(--color-blue-700) 30%,
+    var(--color-blue-500) 30% 80%,
+    var(--color-blue-400) 80%
   );
   opacity: 1;
 }

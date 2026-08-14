@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
+import Authors from "../components/Authors.astro";
 import Divider from "../components/Divider.astro";
 import PublishDate from "../components/PublishDate.astro";
 import Layout from "./Layout.astro";
@@ -8,7 +9,8 @@ import "../styles/global.css";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, authors } =
+  Astro.props;
 ---
 
 <Layout
@@ -26,6 +28,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
     <div class="space-y-4">
       <h1>{title}</h1>
       <Divider variant="small-gray" />
+      <Authors authors={authors} />
       <PublishDate pubDate={pubDate} updatedDate={updatedDate} />
       <Divider variant="big-blue" />
     </div>

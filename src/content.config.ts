@@ -22,6 +22,14 @@ const blog = defineCollection({
       pubDate: z.coerce.date(),
       updatedDate: z.coerce.date().optional(),
       heroImage: z.optional(image()),
+      authors: z
+        .array(
+          z.object({
+            name: z.string(),
+            image: z.optional(image()),
+          }),
+        )
+        .optional(),
     }),
 });
 
@@ -40,6 +48,14 @@ const event = defineCollection({
       endDate: z.coerce.date().optional(),
       venue: z.string(),
       heroImage: z.optional(image()),
+      authors: z
+        .array(
+          z.object({
+            name: z.string(),
+            image: z.optional(image()),
+          }),
+        )
+        .optional(),
     }),
 });
 
@@ -52,7 +68,24 @@ const page = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    authors: z
+      .array(
+        z.object({
+          name: z.string(),
+          image: z.optional(image()),
+        }),
+      )
+      .optional(),
   }),
 });
 
-export const collections = { blog, event, page };
+const authors = defineCollection({
+  loader: glob({ base: "./src/content/authors", pattern: "**/*.{md,mdx}" }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      image: z.optional(image()),
+    }),
+});
+
+export const collections = { blog, event, page, authors };
