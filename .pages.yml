@@ -129,7 +129,7 @@ content:
         required: true
         options:
           creatable: true
-          values: [Arbeidern, Nordis, Trevarefabrikken, Kulturhuset]
+          values: [Arbeidern, Nordis, Trevarefabrikken, Kulturhuset, TBA]
       - name: pubDate
         label: Publiseringsdato
         type: date
