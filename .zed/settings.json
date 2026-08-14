@@ -15,7 +15,7 @@
 {
   "languages": {
     "Astro": {
-      "language_servers": ["astro-language-server", "!biome", "..."],
-    },
-  },
+      "language_servers": ["astro-language-server", "!biome", "..."]
+    }
+  }
 }
