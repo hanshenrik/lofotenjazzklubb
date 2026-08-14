@@ -22,7 +22,7 @@ media:
     label: Bilder
     input: src/assets/images
     output: ../../assets/images
-    extensions: [png, jpg, jpeg, webp, svg, gif]
+    extensions: [png, jpg, jpeg, webp, svg, gif, avif]
 
 content:
   - name: blog
