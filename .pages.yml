@@ -71,7 +71,7 @@ content:
           media: images
           # Default browse/upload folder for this field, as a repo path.
           path: src/assets/images/blog
-          extensions: [png, jpg, jpeg, webp, svg, gif]
+          extensions: [png, jpg, jpeg, webp, svg, gif, avif]
 
   - name: event
     label: Arrangementer
@@ -138,7 +138,7 @@ content:
         options:
           media: images
           path: src/assets/images/event
-          extensions: [png, jpg, jpeg, webp, svg, gif]
+          extensions: [png, jpg, jpeg, webp, svg, gif, avif]
 
   # Single file rather than a collection: one editable page, not a list. The
   # field named `body` is special — PagesCMS maps it to the markdown below the
@@ -166,7 +166,7 @@ content:
           format: markdown
           media: images
           path: src/assets/images/page
-          extensions: [png, jpg, jpeg, webp, svg, gif]
+          extensions: [png, jpg, jpeg, webp, svg, gif, avif]
 
 settings:
   hide: true
