@@ -73,7 +73,7 @@ content:
           path: src/assets/images/blog
           extensions: [png, jpg, jpeg, webp, svg, gif, avif]
       # `body` is the reserved field name that PagesCMS maps to the markdown
-      # below the frontmatter — see the note on the Om oss page below. Astro
+      # below the frontmatter — see the note on the Om page below. Astro
       # renders it through <Content /> in src/pages/aktuelt/[...slug].astro.
       - name: body
         label: Innhold
@@ -164,7 +164,7 @@ content:
   # field named `body` is special — PagesCMS maps it to the markdown below the
   # frontmatter, while every other field stays in the frontmatter.
   - name: om
-    label: Om oss
+    label: Om
     type: file
     path: src/content/page/om.mdx
     fields:
