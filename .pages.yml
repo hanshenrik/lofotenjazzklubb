@@ -178,8 +178,8 @@ content:
         options:
           collection: authors
           multiple: true
-          label: "{primary}"
-          value: "{primary}"
+          label: "{name}"
+          value: "{name}"
       - name: heroImage
         label: Hovedbilde
         type: image
