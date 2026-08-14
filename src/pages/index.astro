@@ -36,7 +36,7 @@ const events = (await getCollection("event")).sort(
                 image={event.data.heroImage}
               >
                 <div slot="meta" class="flex flex-col md:flex-row md:gap-1">
-                  <div class="flex items-center justify-start space-x-1 bg-blue-500 px-2 py-2 text-white group-hover:text-white md:bg-transparent md:px-0 md:pr-2 md:text-black md:group-hover:bg-blue-500">
+                  <div class="flex items-center justify-start space-x-1 bg-blue-500 px-2 py-2 text-white group-hover:text-white md:bg-transparent md:px-0 md:py-3 md:pr-2 md:text-black md:group-hover:bg-blue-500">
                     <Icon
                       name="circum:calendar-date"
                       class="-translate-y-0.5"
@@ -60,7 +60,7 @@ const events = (await getCollection("event")).sort(
                     )}
                   </div>
 
-                  <div class="flex items-center justify-start space-x-1 bg-blue-400 px-2 py-2 text-white group-hover:text-white md:bg-transparent md:px-2 md:text-black md:group-hover:bg-blue-400">
+                  <div class="flex items-center justify-start space-x-1 bg-blue-400 px-2 py-2 text-white group-hover:text-white md:bg-transparent md:px-2 md:py-3 md:text-black md:group-hover:bg-blue-400">
                     <Icon
                       name="circum:location-on"
                       size={32}
