@@ -1,14 +1,14 @@
 ---
 import { SITE_TITLE } from "../consts";
+import AbstractLogo from "./AbstractLogo.astro";
 import HeaderLink from "./HeaderLink.astro";
-import GrittyBadge from "./GrittyBadge.astro";
 ---
 
 <header class="sticky top-0 z-10 bg-white px-4 py-4 md:px-16">
   <nav>
     <div class="flex items-end justify-between md:items-center">
       <a href="/" class="no-hover-effect no-underline"
-        ><GrittyBadge />
+        ><AbstractLogo />
         <span class="sr-only">{SITE_TITLE}</span>
       </a>
       <div
