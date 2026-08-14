@@ -195,6 +195,6 @@ a:not(.no-hover-effect):focus {
 
 hr {
   border: none;
-  border-top: 6px solid var(--color-blue-200);
+  border-top: 6px solid var(--color-blue-500);
   transform: skewX(-12deg);
 }

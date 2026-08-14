@@ -20,51 +20,54 @@ const events = (await getCollection("event")).sort(
     <Image src={LogoImage} alt={SITE_TITLE} class="mt-4 w-full md:mt-16" />
     <section class="space-y-8">
       <h2 class="text-5xl md:text-8xl">Arrangementer</h2>
-      <ul class="grid grid-cols-1 gap-4">
+      <ul class="grid grid-cols-1 gap-4 md:gap-8">
         {
-          events.map((event) => (
-            <Card
-              href={`/arrangement/${event.id}/`}
-              title={event.data.title}
-              image={event.data.heroImage}
-            >
-              <div slot="meta" class="flex flex-col md:flex-row md:gap-1">
-                <div class="flex items-center justify-start space-x-1 bg-blue-500 px-2 py-2 text-white group-hover:text-white md:bg-transparent md:px-0 md:pr-2 md:text-black md:group-hover:bg-blue-500">
-                  <Icon
-                    name="circum:calendar-date"
-                    class="-translate-y-0.5"
-                    size={32}
-                  />
-                  {/* A range would run long spelled out, so it drops to the
+          events.map((event, index) => (
+            <>
+              <Card
+                href={`/arrangement/${event.id}/`}
+                title={event.data.title}
+                image={event.data.heroImage}
+              >
+                <div slot="meta" class="flex flex-col md:flex-row md:gap-1">
+                  <div class="flex items-center justify-start space-x-1 bg-blue-500 px-2 py-2 text-white group-hover:text-white md:bg-transparent md:px-0 md:pr-2 md:text-black md:group-hover:bg-blue-500">
+                    <Icon
+                      name="circum:calendar-date"
+                      class="-translate-y-0.5"
+                      size={32}
+                    />
+                    {/* A range would run long spelled out, so it drops to the
                       short form once there is an end date to show. */}
-                  <Time
-                    date={event.data.startDate}
-                    format={
-                      event.data.endDate ? formatDate : formatWeekdayDateTime
-                    }
-                    class="first-letter:uppercase"
-                  />
+                    <Time
+                      date={event.data.startDate}
+                      format={
+                        event.data.endDate ? formatDate : formatWeekdayDateTime
+                      }
+                      class="first-letter:uppercase"
+                    />
 
-                  {event.data.endDate && (
-                    <span>
-                      –
-                      <Time date={event.data.endDate} format={formatDate} />
-                    </span>
-                  )}
+                    {event.data.endDate && (
+                      <span>
+                        –
+                        <Time date={event.data.endDate} format={formatDate} />
+                      </span>
+                    )}
+                  </div>
+
+                  <div class="flex items-center justify-start space-x-1 bg-blue-400 px-2 py-2 text-white group-hover:text-white md:bg-transparent md:px-2 md:text-black md:group-hover:bg-blue-400">
+                    <Icon
+                      name="circum:location-on"
+                      size={32}
+                      class="-translate-y-0.5"
+                    />
+                    <span>{event.data.venue}</span>
+                  </div>
                 </div>
 
-                <div class="flex items-center justify-start space-x-1 bg-blue-400 px-2 py-2 text-white group-hover:text-white md:bg-transparent md:px-2 md:text-black md:group-hover:bg-blue-400">
-                  <Icon
-                    name="circum:location-on"
-                    size={32}
-                    class="-translate-y-0.5"
-                  />
-                  <span>{event.data.venue}</span>
-                </div>
-              </div>
-
-              <p>{event.data.description}</p>
-            </Card>
+                <p>{event.data.description}</p>
+              </Card>
+              {index !== events.length - 1 && <hr class="my-4" />}
+            </>
           ))
         }
       </ul>
