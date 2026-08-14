@@ -1,0 +1,21 @@
+// Project-local Zed settings. Overrides ~/.config/zed/settings.json for this
+// project only.
+//
+// Biome is disabled here. It only parses the frontmatter of .astro files, not
+// the template markup, so anything used solely in the template — e.g.
+// `const { Content } = await render(event)` rendered as `<Content />` — is
+// falsely reported as an unused variable. Astro is listed as only partially
+// supported: https://biomejs.dev/internals/language-support/
+//
+// Formatting and import sorting are handled by Prettier in this project
+// (see .prettierrc), so nothing is lost by turning Biome off.
+//
+// "!biome" disables the server; "..." keeps the remaining defaults for that
+// language.
+{
+  "languages": {
+    "Astro": {
+      "language_servers": ["astro-language-server", "!biome", "..."],
+    },
+  },
+}

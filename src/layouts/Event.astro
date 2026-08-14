@@ -7,7 +7,7 @@ import FormattedDate from "../components/FormattedDate.astro";
 import Header from "../components/Header.astro";
 import "../styles/global.css";
 
-type Props = CollectionEntry<"blog">["data"];
+type Props = CollectionEntry<"event">["data"];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---

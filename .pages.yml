@@ -7,7 +7,7 @@ media:
 
 content:
   - name: blog
-    label: Nyheter
+    label: Aktuelt
     type: collection
     path: src/content/blog
     filename: "{primary}-{year}-{month}-{day}.mdx"
@@ -50,6 +50,78 @@ content:
         options:
           media: public-images
           path: public
+          extensions: [png, jpg, jpeg, webp, svg, gif]
+
+  - name: event
+    label: Arrangementer
+    type: collection
+    path: src/content/event
+    filename: "{primary}-{year}-{month}-{day}.mdx"
+    view:
+      fields: [heroImage, title, pubDate, updatedDate]
+      primary: title
+      sort: [pubDate, title]
+      default:
+        sort: pubDate
+        order: desc
+    fields:
+      - name: title
+        label: Tittel
+        type: string
+        required: true
+        description: "Tittelen vil også bli brukt i URL-en"
+      - name: description
+        label: Beskrivelse
+        type: text
+        required: true
+        options:
+          rows: 2
+          maxLength: 150
+      - name: pubDate
+        label: Publiseringsdato
+        type: date
+        required: true
+        options:
+          time: true
+          format: yyyy-MM-dd HH:mm
+      - name: updatedDate
+        label: Oppdatert
+        type: date
+        options:
+          time: true
+          format: yyyy-MM-dd HH:mm
+      - name: heroImage
+        label: Hovedbilde
+        type: image
+        options:
+          media: images
+          extensions: [png, jpg, jpeg, webp, svg, gif]
+
+  # Single file rather than a collection: one editable page, not a list. The
+  # field named `body` is special — PagesCMS maps it to the markdown below the
+  # frontmatter, while every other field stays in the frontmatter.
+  - name: om
+    label: Om oss
+    type: file
+    path: src/content/page/om.md
+    fields:
+      - name: title
+        label: Tittel
+        type: string
+        required: true
+      - name: description
+        label: Beskrivelse
+        type: text
+        required: true
+        options:
+          rows: 2
+          maxLength: 150
+      - name: body
+        label: Innhold
+        type: rich-text
+        options:
+          format: markdown
+          media: images
           extensions: [png, jpg, jpeg, webp, svg, gif]
 
 settings:

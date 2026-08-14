@@ -1,1 +1,127 @@
 @import "tailwindcss";
+
+a {
+  text-decoration: none;
+  /* `isolation` creates a stacking context, which keeps the z-index:-1 on
+     ::before scoped to the link. Without it the highlight would drop behind an
+     ancestor's background and vanish on e.g. the footer's bg-blue-100. */
+  position: relative;
+  isolation: isolate;
+}
+a:not(.no-underline) {
+  /* Resting affordance: links are identifiable without hovering. A border on an
+     inline element does not contribute to line box height, so this adds no
+     reflow — same reason the highlight below uses a pseudo-element. */
+  border-bottom: 3px solid var(--color-blue-700);
+}
+
+/* Hover/focus highlight. Drawn as a pseudo-element rather than a background on
+   the link itself so it can be skewed independently of the text, and so the
+   box can grow past the text via negative insets — no padding or line-height
+   involved, so surrounding text never reflows. */
+a::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  /* top | left+right | bottom. The bottom inset is deeper than the top so the
+     fill fully contains the 3px border-bottom (0.3em = 4.8px at a 16px base);
+     at 0.15em it would be 2.4px and the border would poke out underneath. */
+  inset: -0.15em -0.4em -0.3em;
+  background-color: var(--color-blue-700);
+  /* Angle is a variable so a call site can dial it back without redefining the
+     whole effect — the nav sets --link-skew to a subtler value. */
+  transform: skewX(var(--link-skew, -12deg));
+  opacity: 0;
+}
+
+/* aria-current="page" doubles as the styling hook for the active nav link, so
+   it gets the same fill as hover without the element itself being transformed
+   (which would skew the text along with the background). */
+a:hover::before,
+a:focus::before,
+a[aria-current="page"]::before {
+  opacity: 1;
+}
+
+a:hover,
+a:focus {
+  color: #fff;
+}
+
+/* Heading sizes, so h1–h6 don't need a text-* utility at every call site.
+   Tailwind's preflight resets headings to `font-size: inherit`, which is why
+   they otherwise render at body size.
+
+   These live in `@layer base` deliberately. Tailwind emits utilities inside
+   `@layer utilities`, and in the CSS cascade *unlayered* rules beat layered
+   ones — so a plain `h1 { font-size: ... }` here would override `text-lg` and
+   you could never opt out per instance. Inside the base layer, utilities win.
+
+   Sizes reference Tailwind's own type scale, so they stay in step with the
+   text-* utilities and pick up the paired line-heights. */
+@layer base {
+  h1 {
+    font-size: var(--text-4xl);
+    line-height: var(--text-4xl--line-height);
+  }
+
+  h2 {
+    font-size: var(--text-2xl);
+    line-height: var(--text-2xl--line-height);
+  }
+
+  h3 {
+    font-size: var(--text-xl);
+    line-height: var(--text-xl--line-height);
+  }
+
+  h4 {
+    font-size: var(--text-lg);
+    line-height: var(--text-lg--line-height);
+  }
+
+  /* h5 lands on the body size and h6 below it, following the long-standing
+     browser convention. Worth pinning both explicitly rather than leaving them
+     at preflight's `inherit`: that way an h5 inside a larger-text container
+     stays predictable instead of scaling with its surroundings. */
+  h5 {
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+  }
+
+  h6 {
+    font-size: var(--text-sm);
+    line-height: var(--text-sm--line-height);
+  }
+}
+
+/* Tailwind v4 is configured here, in CSS, rather than in a tailwind.config.js.
+   Values below become both theme tokens and CSS custom properties. */
+@theme {
+  /* Astro's font API injects --font-atkinson (see astro.config.mjs). Mapping it
+     onto --font-sans makes `font-sans` — and the default body font — use it. */
+  --font-sans: var(--font-atkinson), sans-serif;
+
+  /* Brand blue. Overrides Tailwind's default blue scale in place, so existing
+     utilities (bg-blue-200, text-blue-700, …) pick these up with no class
+     changes. Anchored on the two brand colours, which land on 200 and 700:
+
+       #cbe5f1 -> blue-200    #2349db -> blue-700
+
+     Hue ramps 225 -> 270 across the scale, because the anchors are 39 degrees
+     apart: the light tints stay cyan-leaning like #cbe5f1, the deep shades go
+     indigo like #2349db. Lightness follows Tailwind's own blue ramp so the
+     steps behave the way you'd expect. Values are oklch (as in Tailwind v4)
+     with the sRGB hex noted; contrast is against white. */
+  --color-blue-50: oklch(0.97 0.008 225.2); /* #f0f6f9 */
+  --color-blue-100: oklch(0.932 0.017 226.2); /* #ddebf2 */
+  --color-blue-200: oklch(0.907 0.032 227.2); /* #cbe5f1 — brand */
+  --color-blue-300: oklch(0.809 0.065 235); /* #98c8e5 */
+  --color-blue-400: oklch(0.707 0.115 242.7); /* #5aa8e2 */
+  --color-blue-500: oklch(0.623 0.166 250.5); /* #208ae6 — 3.60:1 */
+  --color-blue-600: oklch(0.546 0.205 258.3); /* #0069e4 — 5.07:1 AA */
+  --color-blue-700: oklch(0.484 0.225 266); /* #2349db — brand, 6.89:1 AA */
+  --color-blue-800: oklch(0.424 0.184 267.2); /* #233eb1 — 8.77:1 AAA */
+  --color-blue-900: oklch(0.379 0.135 268.4); /* #253989 — 10.37:1 AAA */
+  --color-blue-950: oklch(0.282 0.084 269.6); /* #192552 — 14.71:1 AAA */
+}

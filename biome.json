@@ -1,0 +1,17 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.8/schema.json",
+  "files": {
+    "includes": ["**", "!.astro", "!dist", "!**/*.astro"]
+  },
+  "formatter": { "enabled": false },
+  "assist": {
+    "actions": {
+      "source": { "organizeImports": "off" }
+    }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  }
+}

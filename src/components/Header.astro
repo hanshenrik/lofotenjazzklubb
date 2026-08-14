@@ -1,14 +1,12 @@
 ---
-import { SITE_TITLE } from "../consts";
 import HeaderLink from "./HeaderLink.astro";
 ---
 
-<header>
+<header class="sticky top-0 px-4 md:px-16 py-4">
   <nav>
-    <h2><a href="/">{SITE_TITLE}</a></h2>
-    <div>
-      <HeaderLink href="/">Hva skjer?</HeaderLink>
-      <HeaderLink href="/nyheter">Nyheter</HeaderLink>
+    <div class="flex items-center gap-3 justify-center md:justify-end">
+      <HeaderLink href="/">Arrangementer</HeaderLink>
+      <HeaderLink href="/aktuelt">Aktuelt</HeaderLink>
       <HeaderLink href="/om">Om</HeaderLink>
     </div>
   </nav>
