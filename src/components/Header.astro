@@ -1,16 +1,16 @@
 ---
-import { Image } from "astro:assets";
-import LogoImage from "../assets/images/lofoten-jazzklubb.png";
 import { SITE_TITLE } from "../consts";
 import HeaderLink from "./HeaderLink.astro";
+import GrittyBadge from "./GrittyBadge.astro";
 ---
 
 <header class="sticky top-0 z-10 bg-white px-4 py-4 md:px-16">
   <nav>
     <div class="flex items-end justify-between md:items-center">
       <a href="/" class="no-hover-effect no-underline"
-        ><Image src={LogoImage} alt={SITE_TITLE} class="w-16 md:w-24" /></a
-      >
+        ><GrittyBadge />
+        <span class="sr-only">{SITE_TITLE}</span>
+      </a>
       <div
         class="flex items-center justify-center gap-2 md:justify-end md:gap-6"
       >

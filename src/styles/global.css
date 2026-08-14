@@ -105,8 +105,17 @@ a:not(.no-hover-effect)::before {
    it gets the same fill as hover without the element itself being transformed
    (which would skew the text along with the background). */
 a:not(.no-hover-effect):hover::before,
-a:not(.no-hover-effect):focus::before,
-a:not(.no-hover-effect)[aria-current="page"]::before {
+a:not(.no-hover-effect):focus::before {
+  opacity: 1;
+}
+
+a:not(.no-hover-effect)[aria-current="page"]:not(:hover)::before {
+  background: linear-gradient(
+    to right,
+    var(--color-blue-700) 20%,
+    var(--color-blue-500) 20% 66%,
+    var(--color-blue-400) 66%
+  );
   opacity: 1;
 }
 

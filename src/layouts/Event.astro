@@ -45,7 +45,17 @@ const eventSchema = {
 <Layout title={title} description={description}>
   <article class="space-y-8">
     <div>
-      {heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
+      {
+        heroImage && (
+          <Image
+            width={1020}
+            height={510}
+            src={heroImage}
+            alt={title}
+            loading="eager"
+          />
+        )
+      }
     </div>
     <div class="space-y-4">
       <h1>{title}</h1>

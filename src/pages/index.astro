@@ -17,7 +17,12 @@ const events = (await getCollection("event")).sort(
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <div class="space-y-16 md:space-y-32">
-    <Image src={LogoImage} alt={SITE_TITLE} class="mt-4 w-full md:mt-16" />
+    <Image
+      loading="eager"
+      src={LogoImage}
+      alt={SITE_TITLE}
+      class="mt-4 w-full md:mt-16"
+    />
     <section class="space-y-8">
       <h2 class="text-5xl md:text-8xl">Arrangementer</h2>
       <ul class="grid grid-cols-1 gap-4 md:gap-8">
