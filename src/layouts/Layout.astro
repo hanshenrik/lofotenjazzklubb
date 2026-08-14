@@ -1,9 +1,15 @@
 ---
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import type { ComponentProps } from "astro/types";
 import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
 
-const { title, description } = Astro.props;
+// Transparent to BaseHead: the props are taken straight from it and forwarded
+// untouched, so a page that needs a share image, article timestamps or extra
+// JSON-LD can pass them here instead of hand-rolling its own <html>/<head>
+// just to reach BaseHead. Add a prop to BaseHead and it is available here with
+// no change to this file.
+type Props = ComponentProps<typeof BaseHead>;
 
 // Sticky footer: <body> is a full-height flex column and <main> is the only
 // growing child, so a short page pushes the footer to the bottom of the
@@ -13,11 +19,11 @@ const { title, description } = Astro.props;
 <!doctype html>
 <html lang="nb">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead {...Astro.props} />
   </head>
   <body class="flex min-h-dvh flex-col">
     <Header />
-    <main class="mx-auto w-full max-w-5xl flex-1">
+    <main class="mx-auto w-full max-w-5xl flex-1 pb-32">
       <slot />
     </main>
     <Footer />

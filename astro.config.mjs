@@ -4,6 +4,7 @@ import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
+import icon from "astro-icon";
 import { defineConfig, fontProviders } from "astro/config";
 
 // https://astro.build/config
@@ -35,6 +36,11 @@ export default defineConfig({
       },
     }),
     react(),
+    // Icons resolve on demand from the installed @iconify-json/* packages —
+    // reference one as <Icon name="marketeq:calendar" /> and only the icons
+    // actually used get inlined into the page. src/icons/*.svg also works, for
+    // one-off local marks.
+    icon(),
   ],
 
   fonts: [

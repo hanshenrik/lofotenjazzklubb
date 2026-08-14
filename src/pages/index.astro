@@ -1,9 +1,11 @@
 ---
+import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import Time from "../components/Time.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import Layout from "../layouts/Layout.astro";
+import { formatDate } from "../utils/date";
 import "../styles/global.css";
 import LogoImage from "../assets/images/lofoten-jazzklubb.png";
 
@@ -13,25 +15,54 @@ const events = (await getCollection("event")).sort(
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <Image src={LogoImage} alt={SITE_TITLE} class="w-full mt-16" />
-  <section>
-    <ul>
+  <section class="space-y-16">
+    <Image src={LogoImage} alt={SITE_TITLE} class="w-full mt-16" />
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
       {
         events.map((event) => (
           <li>
-            <a href={`/arrangement/${event.id}/`}>
+            <a
+              href={`/arrangement/${event.id}/`}
+              class="no-hover-effect group space-y-2"
+            >
               {event.data.heroImage && (
                 <Image
                   width={720}
                   height={360}
                   src={event.data.heroImage}
                   alt={""}
+                  class="w-full group-hover:-skew-2 group-focus:-skew-2 transition-transform duration-700 ease-out"
                 />
               )}
-              <h4>{event.data.title}</h4>
-              <p>
-                <Time date={event.data.startDate} />
-              </p>
+              <div class="space-y-2">
+                <div class="grid grid-cols-1 items-center">
+                  <h4 class="text-4xl md:text-6xl">{event.data.title}</h4>
+                  <div class="flex gap-4">
+                    <div class="flex items-center justify-start">
+                      <Icon name="circum:location-on" size={32} />
+                      <Time
+                        date={event.data.startDate}
+                        format={formatDate}
+                        class="first-letter:uppercase"
+                      />
+
+                      {event.data.endDate && (
+                        <span>
+                          –
+                          <Time date={event.data.endDate} format={formatDate} />
+                        </span>
+                      )}
+                    </div>
+
+                    <div class="flex items-center justify-start">
+                      <Icon name="circum:calendar-date" size={32} />
+                      <span>{event.data.venue}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <p>{event.data.description}</p>
+              </div>
             </a>
           </li>
         ))

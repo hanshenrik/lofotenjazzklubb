@@ -1,13 +1,16 @@
 ---
+import type { HTMLAttributes } from "astro/types";
 import { formatDateTime, formatIso, type DateFormatter } from "../utils/date";
 
-interface Props {
+interface Props extends HTMLAttributes<"time"> {
   date: Date;
   /** Pick any formatter from src/utils/date.ts, e.g. `format={formatDate}`. */
   format?: DateFormatter;
 }
 
-const { date, format = formatDateTime } = Astro.props;
+const { date, format = formatDateTime, class: className } = Astro.props;
 ---
 
-<time datetime={formatIso(date)}>{format(date)}</time>
+<time datetime={formatIso(date)} class={className}>
+  {format(date)}
+</time>

@@ -187,3 +187,9 @@ a:not(.no-hover-effect):focus {
   --color-blue-900: oklch(0.379 0.135 268.4); /* #253989 — 10.37:1 AAA */
   --color-blue-950: oklch(0.282 0.084 269.6); /* #192552 — 14.71:1 AAA */
 }
+
+hr {
+  border: none;
+  border-top: 6px solid var(--color-blue-200);
+  transform: skewX(-12deg);
+}

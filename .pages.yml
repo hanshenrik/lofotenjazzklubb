@@ -72,6 +72,17 @@ content:
           # Default browse/upload folder for this field, as a repo path.
           path: src/assets/images/blog
           extensions: [png, jpg, jpeg, webp, svg, gif, avif]
+      # `body` is the reserved field name that PagesCMS maps to the markdown
+      # below the frontmatter — see the note on the Om oss page below. Astro
+      # renders it through <Content /> in src/pages/aktuelt/[...slug].astro.
+      - name: body
+        label: Innhold
+        type: rich-text
+        options:
+          format: markdown
+          media: images
+          path: src/assets/images/blog
+          extensions: [png, jpg, jpeg, webp, svg, gif, avif]
 
   - name: event
     label: Arrangementer
@@ -136,6 +147,15 @@ content:
         label: Hovedbilde
         type: image
         options:
+          media: images
+          path: src/assets/images/event
+          extensions: [png, jpg, jpeg, webp, svg, gif, avif]
+      # Rendered by <Content /> in src/pages/arrangement/[...slug].astro.
+      - name: body
+        label: Innhold
+        type: rich-text
+        options:
+          format: markdown
           media: images
           path: src/assets/images/event
           extensions: [png, jpg, jpeg, webp, svg, gif, avif]
