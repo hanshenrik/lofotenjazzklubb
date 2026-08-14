@@ -67,9 +67,10 @@ content:
       - name: authors
         label: Forfatter(e)
         type: select
+        creatable: true
+        multiple: true
         options:
-          creatable: true
-          multiple: true
+          values: []
       - name: heroImage
         label: Hovedbilde
         type: image
@@ -133,8 +134,8 @@ content:
         label: Spillested
         type: select
         required: true
+        creatable: true
         options:
-          creatable: true
           values: [Arbeidern, Nordis, Trevarefabrikken, Kulturhuset, TBA]
       - name: pubDate
         label: Publiseringsdato
@@ -152,9 +153,10 @@ content:
       - name: authors
         label: Forfatter(e)
         type: select
+        creatable: true
+        multiple: true
         options:
-          creatable: true
-          multiple: true
+          values: []
       - name: heroImage
         label: Hovedbilde
         type: image
@@ -197,6 +199,7 @@ content:
         options:
           creatable: true
           multiple: true
+          values: []
       - name: body
         label: Innhold
         type: rich-text
