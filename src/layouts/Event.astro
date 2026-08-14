@@ -2,6 +2,8 @@
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
+import Divider from "../components/Divider.astro";
+import PublishDate from "../components/PublishDate.astro";
 import Time from "../components/Time.astro";
 import Layout from "./Layout.astro";
 import "../styles/global.css";
@@ -67,17 +69,9 @@ const eventSchema = {
         <Icon name="circum:location-on" size={40} class="-translate-y-0.5" />
         <span class="text-lg md:text-xl">{venue}</span>
       </div>
-      <hr />
-      <div class="flex flex-col gap-0.5 text-gray-700">
-        <span class="text-xs">Publisert: <Time date={pubDate} /></span>
-        {
-          updatedDate && (
-            <span class="text-2xs text-gray-500">
-              (oppdatert: <Time date={updatedDate} />)
-            </span>
-          )
-        }
-      </div>
+      <Divider variant="small-gray" />
+      <PublishDate pubDate={pubDate} updatedDate={updatedDate} />
+      <Divider variant="big-blue" />
     </div>
     <div class="prose">
       <slot />
