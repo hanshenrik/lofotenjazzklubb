@@ -49,7 +49,7 @@ const eventSchema = {
     </div>
     <div class="space-y-4">
       <h1>{title}</h1>
-      <div class="grid grid-cols-[auto_1fr] gap-3 items-center">
+      <div class="grid grid-cols-[auto_1fr] items-center gap-3">
         <Icon name="circum:calendar-date" size={40} />
         <span class="first-letter:uppercase"
           ><Time date={startDate} format={formatWeekdayDateTime} /></span
@@ -62,7 +62,7 @@ const eventSchema = {
         Publisert: <Time date={pubDate} />
         {
           updatedDate && (
-            <div class="text-gray-500 text-xs">
+            <div class="text-xs text-gray-500">
               (oppdatert: <Time date={updatedDate} />)
             </div>
           )

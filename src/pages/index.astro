@@ -5,7 +5,7 @@ import { getCollection } from "astro:content";
 import Time from "../components/Time.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import Layout from "../layouts/Layout.astro";
-import { formatDate } from "../utils/date";
+import { formatDate, formatWeekdayDateTime } from "../utils/date";
 import "../styles/global.css";
 import LogoImage from "../assets/images/lofoten-jazzklubb.png";
 
@@ -16,8 +16,8 @@ const events = (await getCollection("event")).sort(
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <section class="space-y-16">
-    <Image src={LogoImage} alt={SITE_TITLE} class="w-full mt-16" />
-    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <Image src={LogoImage} alt={SITE_TITLE} class="mt-16 w-full" />
+    <ul class="grid grid-cols-1 gap-4 md:grid-cols-2">
       {
         events.map((event) => (
           <li>
@@ -33,15 +33,19 @@ const events = (await getCollection("event")).sort(
               )}
               <div class="space-y-2 pt-4 pb-6">
                 <div class="grid grid-cols-1 items-center">
-                  <h4 class="text-4xl md:text-6xl group-hover:bg-blue-700 group-hover:text-white w-fit py-2">
+                  <h4 class="w-fit py-2 text-4xl group-hover:bg-blue-700 group-hover:text-white md:text-6xl">
                     {event.data.title}
                   </h4>
                   <div class="flex">
-                    <div class="flex items-center justify-start group-hover:bg-blue-500 group-hover:text-white py-2 pr-2">
+                    <div class="flex items-center justify-start py-2 pr-2 group-hover:bg-blue-500 group-hover:text-white">
                       <Icon name="circum:calendar-date" size={32} />
                       <Time
                         date={event.data.startDate}
-                        format={formatDate}
+                        format={
+                          event.data.endDate
+                            ? formatDate
+                            : formatWeekdayDateTime
+                        }
                         class="first-letter:uppercase"
                       />
 
@@ -53,7 +57,7 @@ const events = (await getCollection("event")).sort(
                       )}
                     </div>
 
-                    <div class="flex items-center justify-start group-hover:bg-blue-400 group-hover:text-white py-2 px-2">
+                    <div class="flex items-center justify-start px-2 py-2 group-hover:bg-blue-400 group-hover:text-white">
                       <Icon name="circum:location-on" size={32} />
                       <span>{event.data.venue}</span>
                     </div>

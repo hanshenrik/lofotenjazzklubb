@@ -5,13 +5,13 @@ import { SITE_TITLE } from "../consts";
 import HeaderLink from "./HeaderLink.astro";
 ---
 
-<header class="sticky top-0 z-10 px-4 md:px-16 py-4 bg-white">
+<header class="sticky top-0 z-10 bg-white px-4 py-4 md:px-16">
   <nav>
     <div class="flex items-center justify-between">
       <a href="/" class="no-hover-effect no-underline"
         ><Image src={LogoImage} alt={SITE_TITLE} class="w-20" /></a
       >
-      <div class="flex items-center gap-3 justify-center md:justify-end">
+      <div class="flex items-center justify-center gap-3 md:justify-end">
         <HeaderLink href="/">Arrangementer</HeaderLink>
         <HeaderLink href="/aktuelt">Aktuelt</HeaderLink>
         <HeaderLink href="/om">Om</HeaderLink>
