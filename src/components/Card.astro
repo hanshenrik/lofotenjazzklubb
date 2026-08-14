@@ -32,8 +32,12 @@ const { href, title, image } = Astro.props;
     class="no-hover-effect group block no-underline hover:outline-4 hover:outline-offset-16 hover:outline-blue-700"
   >
     {
-      image && (
+      image ? (
         <Image width={720} height={360} src={image} alt="" class="w-full" />
+      ) : (
+        <div class="flex bg-blue-50 py-16 md:py-24">
+          <div class="mx-auto">Bilde kommer…</div>
+        </div>
       )
     }
     <div class="space-y-2 pb-2 md:pt-4">

@@ -62,65 +62,76 @@
   line-height: var(--text-sm--line-height);
 }
 
+.prose a {
+  hyphens: auto;
+}
+
 a {
   text-decoration: none;
-  /* `isolation` creates a stacking context, which keeps the z-index:-1 on
-     ::before scoped to the link. Without it the highlight would drop behind an
-     ancestor's background and vanish on e.g. the footer's bg-blue-100. */
   position: relative;
-  isolation: isolate;
 }
+
 a:not(.no-underline) {
   /* Resting affordance: links are identifiable without hovering. A border on an
      inline element does not contribute to line box height, so this adds no
      reflow — same reason the highlight below uses a pseudo-element. */
   border-bottom: 3px solid var(--color-blue-700);
+  box-decoration-break: clone;
 }
 
-/* Hover/focus highlight. Drawn as a pseudo-element rather than a background on
-   the link itself so it can be skewed independently of the text, and so the
-   box can grow past the text via negative insets — no padding or line-height
-   involved, so surrounding text never reflows. */
-a:not(.no-hover-effect)::before {
+/* For .no-underline links (header) - use gradient pseudo-element with skew */
+a:not(.no-hover-effect).no-underline {
+  isolation: isolate;
+}
+
+a:not(.no-hover-effect).no-underline::before {
   content: "";
   position: absolute;
   z-index: -1;
-  /* top | left+right | bottom. The bottom inset is deeper than the top so the
-     fill fully contains the 3px border-bottom (0.3em = 4.8px at a 16px base);
-     at 0.15em it would be 2.4px and the border would poke out underneath. */
-  inset: -0.15em -0.25em -0.3em;
+  top: -0.15em;
+  left: -0.25em;
+  right: -0.25em;
+  bottom: -0.3em;
   background: linear-gradient(
     to right,
     var(--color-blue-700) 66%,
     var(--color-blue-500) 66% 90%,
     var(--color-blue-400) 90%
   );
-  /* Angle is a variable so a call site can dial it back without redefining the
-     whole effect — the nav sets --link-skew to a subtler value. */
   transform: skewX(var(--link-skew, -12deg));
   opacity: 0;
 }
 
-/* aria-current="page" doubles as the styling hook for the active nav link, so
-   it gets the same fill as hover without the element itself being transformed
-   (which would skew the text along with the background). */
-a:not(.no-hover-effect):hover::before,
-a:not(.no-hover-effect):focus::before {
+a:not(.no-hover-effect).no-underline:hover::before,
+a:not(.no-hover-effect).no-underline:focus::before {
   opacity: 1;
 }
 
-a:not(.no-hover-effect)[aria-current="page"]:not(:hover)::before {
+/* aria-current="page" for .no-underline links - special distribution */
+a:not(.no-hover-effect).no-underline[aria-current="page"]:not(:hover)::before {
   background: linear-gradient(
     to right,
-    var(--color-blue-700) 20%,
-    var(--color-blue-500) 20% 66%,
-    var(--color-blue-400) 66%
+    var(--color-blue-700) 40%,
+    var(--color-blue-500) 40% 70%,
+    var(--color-blue-400) 70%
   );
   opacity: 1;
 }
 
-a:not(.no-hover-effect):hover,
-a:not(.no-hover-effect):focus {
+/* For regular links - use element's own background with box-decoration-break */
+a:not(.no-hover-effect):not(.no-underline) {
+  box-decoration-break: clone;
+}
+
+a:not(.no-hover-effect):not(.no-underline):hover,
+a:not(.no-hover-effect):not(.no-underline):focus {
+  background: var(--color-blue-700);
+  color: #fff;
+}
+
+/* Text color on hover for .no-underline */
+a:not(.no-hover-effect).no-underline:hover,
+a:not(.no-hover-effect).no-underline:focus {
   color: #fff;
 }
 
@@ -200,6 +211,9 @@ a:not(.no-hover-effect):focus {
   --color-blue-800: oklch(0.424 0.184 267.2); /* #233eb1 — 8.77:1 AAA */
   --color-blue-900: oklch(0.379 0.135 268.4); /* #253989 — 10.37:1 AAA */
   --color-blue-950: oklch(0.282 0.084 269.6); /* #192552 — 14.71:1 AAA */
+
+  --text-2xs: 0.625rem;
+  --text-2xs--line-height: 0.75rem;
 }
 
 hr {

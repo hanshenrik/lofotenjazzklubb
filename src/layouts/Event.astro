@@ -61,20 +61,20 @@ const eventSchema = {
       <h1>{title}</h1>
       <div class="grid grid-cols-[auto_1fr] items-center gap-3">
         <Icon name="circum:calendar-date" size={40} class="-translate-y-0.5" />
-        <span class="first-letter:uppercase"
+        <span class="text-lg first-letter:uppercase md:text-xl"
           ><Time date={startDate} format={formatWeekdayDateTime} /></span
         >
         <Icon name="circum:location-on" size={40} class="-translate-y-0.5" />
-        <span>{venue}</span>
+        <span class="text-lg md:text-xl">{venue}</span>
       </div>
       <hr />
-      <div class="flex items-baseline gap-1 text-gray-700">
-        Publisert: <Time date={pubDate} />
+      <div class="flex flex-col gap-0.5 text-gray-700">
+        <span class="text-xs">Publisert: <Time date={pubDate} /></span>
         {
           updatedDate && (
-            <div class="text-xs text-gray-500">
+            <span class="text-2xs text-gray-500">
               (oppdatert: <Time date={updatedDate} />)
-            </div>
+            </span>
           )
         }
       </div>
