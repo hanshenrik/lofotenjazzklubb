@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
+import { isFuture } from "date-fns"
 import { getCollection } from "astro:content";
 import Card from "../components/Card.astro";
 import Divider from "../components/Divider.astro";
@@ -11,8 +12,8 @@ import { formatDate, formatWeekdayDateTime } from "../utils/date";
 import "../styles/global.css";
 import LogoImage from "../assets/images/lofoten-jazzklubb.png";
 
-const events = (await getCollection("event")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+const events = (await getCollection("event")).filter(event => isFuture(event.data.startDate)).sort(
+  (a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf(),
 );
 ---
 
