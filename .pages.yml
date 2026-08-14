@@ -25,6 +25,29 @@ media:
     extensions: [png, jpg, jpeg, webp, svg, gif, avif]
 
 content:
+  - name: authors
+    label: Forfattere
+    type: collection
+    path: src/content/authors
+    filename: "{primary}.mdx"
+    view:
+      fields: [name, image]
+      primary: name
+      sort: [name]
+    fields:
+      - name: name
+        label: Navn
+        type: string
+        required: true
+      - name: image
+        label: Bilde
+        type: image
+        required: false
+        options:
+          media: images
+          path: src/assets/images/authors
+          extensions: [png, jpg, jpeg, webp, svg, gif, avif]
+
   - name: blog
     label: Aktuelt
     type: collection
@@ -203,29 +226,6 @@ content:
           format: markdown
           media: images
           path: src/assets/images/page
-          extensions: [png, jpg, jpeg, webp, svg, gif, avif]
-
-  - name: authors
-    label: Forfattere
-    type: collection
-    path: src/content/authors
-    filename: "{primary}.mdx"
-    view:
-      fields: [name, image]
-      primary: name
-      sort: [name]
-    fields:
-      - name: name
-        label: Navn
-        type: string
-        required: true
-      - name: image
-        label: Bilde
-        type: image
-        required: false
-        options:
-          media: images
-          path: src/assets/images/authors
           extensions: [png, jpg, jpeg, webp, svg, gif, avif]
 
 settings:
