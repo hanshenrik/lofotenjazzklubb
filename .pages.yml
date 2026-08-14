@@ -179,6 +179,7 @@ content:
           collection: authors
           multiple: true
           label: "{primary}"
+          value: "{primary}"
       - name: heroImage
         label: Hovedbilde
         type: image
