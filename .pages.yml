@@ -213,12 +213,6 @@ content:
         options:
           rows: 2
           maxLength: 150
-      - name: authors
-        label: Forfatter(e)
-        type: reference
-        options:
-          collection: authors
-          multiple: true
       - name: body
         label: Innhold
         type: rich-text
