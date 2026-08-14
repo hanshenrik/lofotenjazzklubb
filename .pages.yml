@@ -129,6 +129,7 @@ content:
           authors,
           "author.name",
           "authors.name",
+          "authors->name",
           pubDate,
           updatedDate,
         ]
