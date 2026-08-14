@@ -93,7 +93,8 @@ content:
         options:
           collection: authors
           multiple: true
-          label: name
+          label: "{name}"
+          value: "{name}"
       - name: heroImage
         label: Hovedbilde
         type: image
