@@ -1,0 +1,15 @@
+---
+interface Props {
+  authors?: string[];
+}
+
+const { authors } = Astro.props;
+---
+
+{
+  authors?.length ? (
+    <div class="text-sm text-gray-600">
+      Forfatter{authors.length > 1 ? "e" : ""}: {authors.join(", ")}
+    </div>
+  ) : null
+}
