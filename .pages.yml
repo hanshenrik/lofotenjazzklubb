@@ -93,7 +93,7 @@ content:
         options:
           collection: authors
           multiple: true
-          display: name
+          label: name
       - name: heroImage
         label: Hovedbilde
         type: image
@@ -178,7 +178,7 @@ content:
         options:
           collection: authors
           multiple: true
-          display: name
+          label: name
       - name: heroImage
         label: Hovedbilde
         type: image
