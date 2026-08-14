@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
-import FormattedDate from "../components/FormattedDate.astro";
+import Time from "../components/Time.astro";
 import Header from "../components/Header.astro";
 import "../styles/global.css";
 
@@ -31,11 +31,11 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
         <div>
           <div>
             <div>
-              <FormattedDate date={pubDate} />
+              <Time date={pubDate} />
               {
                 updatedDate && (
                   <div>
-                    Last updated on <FormattedDate date={updatedDate} />
+                    Last updated on <Time date={updatedDate} />
                   </div>
                 )
               }

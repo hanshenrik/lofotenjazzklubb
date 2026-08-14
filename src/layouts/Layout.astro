@@ -4,6 +4,10 @@ import Footer from "../components/Footer.astro";
 import BaseHead from "../components/BaseHead.astro";
 
 const { title, description } = Astro.props;
+
+// Sticky footer: <body> is a full-height flex column and <main> is the only
+// growing child, so a short page pushes the footer to the bottom of the
+// viewport instead of leaving it floating mid-screen.
 ---
 
 <!doctype html>
@@ -11,9 +15,9 @@ const { title, description } = Astro.props;
   <head>
     <BaseHead title={title} description={description} />
   </head>
-  <body>
+  <body class="flex min-h-dvh flex-col">
     <Header />
-    <main class="mx-auto max-w-5xl">
+    <main class="mx-auto w-full max-w-5xl flex-1">
       <slot />
     </main>
     <Footer />

@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import FormattedDate from "../components/FormattedDate.astro";
+import Time from "../components/Time.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import Layout from "../layouts/Layout.astro";
 import "../styles/global.css";
@@ -13,7 +13,7 @@ const events = (await getCollection("event")).sort(
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <Image src={LogoImage} alt={SITE_TITLE} class="w-full" />
+  <Image src={LogoImage} alt={SITE_TITLE} class="w-full mt-16" />
   <section>
     <ul>
       {
@@ -30,7 +30,7 @@ const events = (await getCollection("event")).sort(
               )}
               <h4>{event.data.title}</h4>
               <p>
-                <FormattedDate date={event.data.startDate} />
+                <Time date={event.data.startDate} />
               </p>
             </a>
           </li>

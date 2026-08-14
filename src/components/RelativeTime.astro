@@ -1,0 +1,45 @@
+---
+import { formatDateTime, formatIso, type DateFormatter } from "../utils/date";
+
+interface Props {
+  date: Date;
+  /** Server-rendered fallback, shown until the client script runs (and forever
+   *  without JS). Defaults to the absolute date, which is never wrong. */
+  fallback?: DateFormatter;
+}
+
+const { date, fallback = formatDateTime } = Astro.props;
+
+const absolute = formatDateTime(date);
+---
+
+<!--
+  Separate from <Time> on purpose: Astro hoists <script> tags statically, so a
+  `relative` prop on <Time> would ship this JS to every page that renders a
+  date, not just the ones wanting live relative text.
+
+  The absolute date is rendered server-side and kept in `title`, so the value is
+  correct before hydration and without JavaScript at all.
+-->
+<time datetime={formatIso(date)} title={absolute} data-relative>
+  {fallback(date)}
+</time>
+
+<script>
+  import { formatRelativeToNow } from "../utils/date";
+
+  // Recomputed in the browser, so the phrasing reflects when the page is read
+  // rather than when it was built.
+  const render = () => {
+    for (const el of document.querySelectorAll<HTMLTimeElement>(
+      "time[data-relative]",
+    )) {
+      if (el.dateTime)
+        el.textContent = formatRelativeToNow(new Date(el.dateTime));
+    }
+  };
+
+  render();
+  // Keeps "for 1 minutt siden" honest on a tab left open.
+  setInterval(render, 60_000);
+</script>

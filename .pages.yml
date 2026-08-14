@@ -103,7 +103,7 @@ content:
   - name: om
     label: Om oss
     type: file
-    path: src/content/page/om.md
+    path: src/content/page/om.mdx
     fields:
       - name: title
         label: Tittel

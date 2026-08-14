@@ -1,13 +1,21 @@
 ---
+import { Image } from "astro:assets";
+import LogoImage from "../assets/images/lofoten-jazzklubb.png";
+import { SITE_TITLE } from "../consts";
 import HeaderLink from "./HeaderLink.astro";
 ---
 
 <header class="sticky top-0 px-4 md:px-16 py-4">
   <nav>
-    <div class="flex items-center gap-3 justify-center md:justify-end">
-      <HeaderLink href="/">Arrangementer</HeaderLink>
-      <HeaderLink href="/aktuelt">Aktuelt</HeaderLink>
-      <HeaderLink href="/om">Om</HeaderLink>
+    <div class="flex items-center justify-between">
+      <a href="/" class="no-hover-effect no-underline"
+        ><Image src={LogoImage} alt={SITE_TITLE} class="w-20" /></a
+      >
+      <div class="flex items-center gap-3 justify-center md:justify-end">
+        <HeaderLink href="/">Arrangementer</HeaderLink>
+        <HeaderLink href="/aktuelt">Aktuelt</HeaderLink>
+        <HeaderLink href="/om">Om</HeaderLink>
+      </div>
     </div>
   </nav>
 </header>

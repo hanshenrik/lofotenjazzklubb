@@ -3,8 +3,10 @@ import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
 const blog = defineCollection({
-  // Load Markdown and MDX files in the `src/content/aktuelt/` directory.
-  loader: glob({ base: "./src/content/aktuelt", pattern: "**/*.{md,mdx}" }),
+  // Load Markdown and MDX files in the `src/content/blog/` directory.
+  // Note the folder is `blog` while the route is /aktuelt/ — the collection name
+  // and the URL are independent, and .pages.yml points PagesCMS at this path.
+  loader: glob({ base: "./src/content/blog", pattern: "**/*.{md,mdx}" }),
   // Type-check frontmatter using a schema
   schema: ({ image }) =>
     z.object({
@@ -36,7 +38,7 @@ const event = defineCollection({
 });
 
 // Standalone pages whose body is edited in PagesCMS. One entry per page, keyed
-// by filename: `om.md` backs `/om`.
+// by filename: `om.mdx` backs `/om`.
 const page = defineCollection({
   // Load Markdown and MDX files in the `src/content/page/` directory.
   loader: glob({ base: "./src/content/page", pattern: "**/*.{md,mdx}" }),

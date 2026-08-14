@@ -1,0 +1,13 @@
+---
+import { formatDateTime, formatIso, type DateFormatter } from "../utils/date";
+
+interface Props {
+  date: Date;
+  /** Pick any formatter from src/utils/date.ts, e.g. `format={formatDate}`. */
+  format?: DateFormatter;
+}
+
+const { date, format = formatDateTime } = Astro.props;
+---
+
+<time datetime={formatIso(date)}>{format(date)}</time>

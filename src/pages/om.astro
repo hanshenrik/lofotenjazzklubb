@@ -3,10 +3,10 @@ import { getEntry, render } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import "../styles/global.css";
 
-// Body lives in src/content/page/om.md so it can be edited in PagesCMS.
+// Body lives in src/content/page/om.mdx so it can be edited in PagesCMS.
 const om = await getEntry("page", "om");
 if (!om) {
-  throw new Error("Mangler innhold: src/content/page/om.md");
+  throw new Error("Mangler innhold: src/content/page/om.mdx");
 }
 const { Content } = await render(om);
 ---
