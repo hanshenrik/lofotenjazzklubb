@@ -26,7 +26,7 @@ a:not(.no-hover-effect)::before {
   /* top | left+right | bottom. The bottom inset is deeper than the top so the
      fill fully contains the 3px border-bottom (0.3em = 4.8px at a 16px base);
      at 0.15em it would be 2.4px and the border would poke out underneath. */
-  inset: -0.15em -0.4em -0.3em;
+  inset: -0.15em -0.25em -0.3em;
   background-color: var(--color-blue-700);
   /* Angle is a variable so a call site can dial it back without redefining the
      whole effect — the nav sets --link-skew to a subtler value. */
