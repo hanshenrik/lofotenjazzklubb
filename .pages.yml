@@ -54,7 +54,7 @@ content:
     path: src/content/blog
     filename: "{primary}-{year}-{month}-{day}.mdx"
     view:
-      fields: [heroImage, title, pubDate, updatedDate]
+      fields: [heroImage, title, authors, pubDate, updatedDate]
       primary: title
       sort: [pubDate, title]
       default:
