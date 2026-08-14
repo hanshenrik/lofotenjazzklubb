@@ -121,18 +121,7 @@ content:
     path: src/content/event
     filename: "{primary}-{year}-{month}-{day}.mdx"
     view:
-      fields:
-        [
-          heroImage,
-          title,
-          startDate,
-          authors,
-          "author.name",
-          "authors.name",
-          "authors->name",
-          pubDate,
-          updatedDate,
-        ]
+      fields: [heroImage, title, startDate, authors, pubDate, updatedDate]
       primary: title
       sort: [startDate, pubDate, title]
       default:
