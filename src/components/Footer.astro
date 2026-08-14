@@ -1,24 +1,43 @@
 ---
+import { Image } from "astro:assets";
+import VippsQrImage from "../assets/images/lofoten-jazzklubb-vipps.jpg";
+
 const today = new Date();
 ---
 
 <footer class="bg-blue-50 px-4 pt-12 pb-16">
-  <div class="mx-auto max-w-5xl space-y-8">
-    <div>
-      <a href="mailto:lofotenjazzklubb@gmail.com">lofotenjazzklubb@gmail.com</a>
+  <div class="mx-auto flex max-w-4xl flex-row items-start justify-between">
+    <div class="space-y-2">
+      <h2>Kontakt</h2>
+      <div class="space-y-6">
+        <div>
+          <a href="mailto:lofotenjazzklubb@gmail.com"
+            >lofotenjazzklubb@gmail.com</a
+          >
+        </div>
+
+        <div>Organisasjonsnummer: 999 177 476</div>
+
+        <address class="not-italic">
+          Lofoten jazzklubb<br />
+          Falkveien 28<br />
+          8300 Svolvær<br />
+          Norge
+        </address>
+
+        <div>
+          &copy; {today.getFullYear()} Lofoten jazzklubb
+        </div>
+      </div>
     </div>
-
-    <div>Organisasjonsnummer: 999 177 476</div>
-
-    <address class="not-italic">
-      Lofoten jazzklubb<br />
-      Falkveien 28<br />
-      8300 Svolvær<br />
-      Norge
-    </address>
-
-    <div>
-      &copy; {today.getFullYear()} Lofoten jazzklubb
+    <div class="flex max-w-60 flex-col items-end gap-2 text-right">
+      <h2>Vår Vipps-sjappe</h2>
+      <Image
+        src={VippsQrImage}
+        alt="Vipps QR-kode Lofoten jazzklubb"
+        class="w-32 rounded-2xl"
+      />
+      <p>Her kan du kjøpe medlemsskap, t-skjorte og litt andre greier.</p>
     </div>
   </div>
 </footer>
