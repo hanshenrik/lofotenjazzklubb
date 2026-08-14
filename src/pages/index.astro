@@ -13,7 +13,7 @@ import "../styles/global.css";
 import LogoImage from "../assets/images/lofoten-jazzklubb.png";
 
 const events = (await getCollection("event")).filter(event => isFuture(event.data.startDate)).sort(
-  (a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf(),
+  (a, b) => a.data.startDate.valueOf() - b.data.startDate.valueOf(),
 );
 ---
 
