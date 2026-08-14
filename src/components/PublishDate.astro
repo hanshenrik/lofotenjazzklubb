@@ -11,9 +11,11 @@ const { pubDate, updatedDate } = Astro.props;
 
 <div class="flex flex-col gap-0.5 text-gray-700">
   <span class="text-xs">Publisert: <Time date={pubDate} /></span>
-  {updatedDate && (
-    <span class="text-2xs text-gray-500">
-      (oppdatert: <Time date={updatedDate} />)
-    </span>
-  )}
+  {
+    updatedDate && (
+      <span class="text-2xs text-gray-500">
+        (oppdatert: <Time date={updatedDate} />)
+      </span>
+    )
+  }
 </div>
