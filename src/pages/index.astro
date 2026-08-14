@@ -2,6 +2,7 @@
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
+import Card from "../components/Card.astro";
 import Time from "../components/Time.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import Layout from "../layouts/Layout.astro";
@@ -22,60 +23,40 @@ const events = (await getCollection("event")).sort(
       <ul class="grid grid-cols-1 gap-4">
         {
           events.map((event) => (
-            <li>
-              <a
-                href={`/arrangement/${event.id}/`}
-                class="no-hover-effect group"
-              >
-                {event.data.heroImage && (
-                  <Image
-                    width={720}
-                    height={360}
-                    src={event.data.heroImage}
-                    alt={""}
-                    class="w-full"
+            <Card
+              href={`/arrangement/${event.id}/`}
+              title={event.data.title}
+              image={event.data.heroImage}
+            >
+              <div slot="meta" class="flex flex-col md:flex-row">
+                <div class="flex items-center justify-start space-x-1 bg-blue-500 px-2 py-2 text-white group-hover:text-white md:px-0 md:pr-2 md:group-hover:bg-blue-700">
+                  <Icon name="circum:calendar-date" size={32} />
+                  {/* A range would run long spelled out, so it drops to the
+                      short form once there is an end date to show. */}
+                  <Time
+                    date={event.data.startDate}
+                    format={
+                      event.data.endDate ? formatDate : formatWeekdayDateTime
+                    }
+                    class="first-letter:uppercase"
                   />
-                )}
-                <div class="space-y-2 pt-4 pb-6">
-                  <div class="grid grid-cols-1 items-center">
-                    <h4 class="w-fit py-2 text-3xl group-hover:bg-blue-700 group-hover:text-white md:text-6xl">
-                      {event.data.title}
-                    </h4>
-                    <div class="flex">
-                      <div class="flex items-center justify-start py-2 pr-2 group-hover:bg-blue-500 group-hover:text-white">
-                        <Icon name="circum:calendar-date" size={32} />
-                        <Time
-                          date={event.data.startDate}
-                          format={
-                            event.data.endDate
-                              ? formatDate
-                              : formatWeekdayDateTime
-                          }
-                          class="first-letter:uppercase"
-                        />
 
-                        {event.data.endDate && (
-                          <span>
-                            –
-                            <Time
-                              date={event.data.endDate}
-                              format={formatDate}
-                            />
-                          </span>
-                        )}
-                      </div>
-
-                      <div class="flex items-center justify-start px-2 py-2 group-hover:bg-blue-400 group-hover:text-white">
-                        <Icon name="circum:location-on" size={32} />
-                        <span>{event.data.venue}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <p>{event.data.description}</p>
+                  {event.data.endDate && (
+                    <span>
+                      –
+                      <Time date={event.data.endDate} format={formatDate} />
+                    </span>
+                  )}
                 </div>
-              </a>
-            </li>
+
+                <div class="flex items-center justify-start space-x-1 bg-blue-400 px-2 py-2 text-white group-hover:text-white md:group-hover:bg-blue-500">
+                  <Icon name="circum:location-on" size={32} />
+                  <span>{event.data.venue}</span>
+                </div>
+              </div>
+
+              <p>{event.data.description}</p>
+            </Card>
           ))
         }
       </ul>

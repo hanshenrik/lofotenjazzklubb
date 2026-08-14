@@ -1,9 +1,11 @@
 ---
-import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
+import Card from "../../components/Card.astro";
 import Time from "../../components/Time.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import { SITE_DESCRIPTION } from "../../consts";
 import Layout from "../../layouts/Layout.astro";
+import { formatDate } from "../../utils/date";
 import "../../styles/global.css";
 
 const posts = (await getCollection("blog")).sort(
@@ -12,26 +14,26 @@ const posts = (await getCollection("blog")).sort(
 ---
 
 <Layout title="Aktuelt" description={SITE_DESCRIPTION}>
-  <section>
-    <ul>
+  <section class="space-y-8">
+    <h2 class="text-5xl md:text-8xl">Aktuelt</h2>
+    <ul class="grid grid-cols-1 gap-4">
       {
         posts.map((post) => (
-          <li>
-            <a href={`/aktuelt/${post.id}/`}>
-              {post.data.heroImage && (
-                <Image
-                  width={720}
-                  height={360}
-                  src={post.data.heroImage}
-                  alt=""
-                />
-              )}
-              <h4>{post.data.title}</h4>
-              <p>
-                <Time date={post.data.pubDate} />
-              </p>
-            </a>
-          </li>
+          <Card
+            href={`/aktuelt/${post.id}/`}
+            title={post.data.title}
+            image={post.data.heroImage}
+          >
+            <div slot="meta" class="flex">
+              <div class="flex items-center justify-start py-2 pr-2 group-hover:bg-blue-500 group-hover:text-white">
+                <Icon name="circum:calendar-date" size={32} />
+                {/* Short form: a publication date has no time worth showing. */}
+                <Time date={post.data.pubDate} format={formatDate} />
+              </div>
+            </div>
+
+            <p>{post.data.description}</p>
+          </Card>
         ))
       }
     </ul>
