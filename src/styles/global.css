@@ -1,4 +1,66 @@
 @import "tailwindcss";
+/* Tailwind v4 loads plugins from CSS, not from a JS config. Gives the `prose`
+   utilities used to style rendered Markdown/MDX bodies. */
+@plugin "@tailwindcss/typography";
+
+/* Brand alignment for rendered content.
+   The link rules further down are unlayered, so they already beat prose's
+   layered ones for text-decoration — but prose still owns the resting link
+   colour, so point it at the same blue as the border-bottom rather than
+   letting it default to near-black. */
+.prose {
+  /* `currentColor`, not var(--color-current) — Tailwind has no --color-current
+     token, so that resolved to nothing and only worked by accident (an invalid
+     var makes the property inherit). */
+  --tw-prose-links: currentColor;
+  --tw-prose-bullets: currentColor;
+  --tw-prose-quote-borders: var(--color-blue-200);
+}
+
+/* Hand heading styling back to the site's own scale.
+   Prose ships its own sizes *and* font-weight 600–800 *and* its own colour, so
+   an MDX heading came out bold and darker than the identical heading rendered
+   from a template. Atkinson only ships 400 and 700, so prose's 800 on h1 and
+   600 on h3/h4 had no matching face and the browser synthesised one — which is
+   what reads as the wrong typeface.
+
+   Unlayered on purpose: prose's rules live in @layer utilities, and unlayered
+   declarations beat layered ones. Sizes mirror the @layer base block further
+   down — keep the two in step. */
+.prose :is(h1, h2, h3, h4, h5, h6) {
+  font-weight: inherit;
+  color: inherit;
+}
+
+.prose h1 {
+  font-size: var(--text-4xl);
+  line-height: var(--text-4xl--line-height);
+}
+
+.prose h2 {
+  font-size: var(--text-2xl);
+  line-height: var(--text-2xl--line-height);
+}
+
+.prose h3 {
+  font-size: var(--text-xl);
+  line-height: var(--text-xl--line-height);
+}
+
+.prose h4 {
+  font-size: var(--text-lg);
+  line-height: var(--text-lg--line-height);
+}
+
+.prose h5 {
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+}
+
+.prose h6 {
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+}
 
 a {
   text-decoration: none;
