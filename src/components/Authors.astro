@@ -1,23 +1,45 @@
 ---
-interface Author {
-  name: string;
-}
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 
 interface Props {
-  authors?: Author[];
+  authors?: string[];
 }
 
 const { authors } = Astro.props;
+
+// Load all authors once and filter by the provided file paths
+const allAuthors = authors?.length ? await getCollection("authors") : [];
+const validAuthors = allAuthors.filter((a) =>
+  authors?.some((authorPath) => {
+    // authorPath could be "src/content/authors/hans-henrik-gronsleth.mdx"
+    // Extract just the filename without extension
+    const parts = authorPath.split("/");
+    const filenameWithExt = parts[parts.length - 1];
+    const filename = filenameWithExt.replace(/\.(mdx|md)$/, "");
+    return a.id === filename;
+  }),
+);
 ---
 
 {
-  authors?.length ? (
-    <div class="text-sm text-gray-600">
-      Forfatter{authors.length > 1 ? "e" : ""}:
-      {authors.map((author, index) => (
+  validAuthors.length ? (
+    <div class="grid grid-cols-[auto_1fr] items-center gap-2 text-base text-gray-700">
+      {validAuthors.map((author, index) => (
         <>
-          {index > 0 && ", "}
-          {author.name}
+          {author.data.image ? (
+            <Image
+              src={author.data.image}
+              alt={author.data.name}
+              class="rounded-2xl"
+            />
+          ) : (
+            <div class="h-10 w-10 rounded-md bg-amber-100" />
+          )}
+          <span>
+            {index > 0 && ", "}
+            {author.data.name}
+          </span>
         </>
       ))}
     </div>

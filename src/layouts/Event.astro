@@ -2,6 +2,7 @@
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
+import Authors from "../components/Authors.astro";
 import Divider from "../components/Divider.astro";
 import PublishDate from "../components/PublishDate.astro";
 import Time from "../components/Time.astro";
@@ -20,6 +21,7 @@ const {
   endDate,
   venue,
   heroImage,
+  authors,
 } = Astro.props;
 
 // MusicEvent is what earns event rich results in Google Search — the date,
@@ -70,7 +72,10 @@ const eventSchema = {
         <span class="text-lg md:text-xl">{venue}</span>
       </div>
       <Divider variant="small-gray" />
-      <PublishDate pubDate={pubDate} updatedDate={updatedDate} />
+      <div class="space-y-1">
+        <Authors authors={authors} />
+        <PublishDate pubDate={pubDate} updatedDate={updatedDate} />
+      </div>
       <Divider variant="big-blue" />
     </div>
     <div class="prose">

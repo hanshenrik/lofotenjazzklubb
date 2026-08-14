@@ -3,6 +3,7 @@ import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import Card from "../components/Card.astro";
+import Divider from "../components/Divider.astro";
 import Time from "../components/Time.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import Layout from "../layouts/Layout.astro";
@@ -71,7 +72,7 @@ const events = (await getCollection("event")).sort(
 
                 <p>{event.data.description}</p>
               </Card>
-              {index !== events.length - 1 && <hr class="my-4" />}
+              {index !== events.length - 1 && <Divider variant="big-blue" />}
             </>
           ))
         }

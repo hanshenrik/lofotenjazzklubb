@@ -28,8 +28,10 @@ const { title, description, pubDate, updatedDate, heroImage, authors } =
     <div class="space-y-4">
       <h1>{title}</h1>
       <Divider variant="small-gray" />
-      <Authors authors={authors} />
-      <PublishDate pubDate={pubDate} updatedDate={updatedDate} />
+      <div class="space-y-2">
+        <Authors authors={authors} />
+        <PublishDate pubDate={pubDate} updatedDate={updatedDate} />
+      </div>
       <Divider variant="big-blue" />
     </div>
     <div class="prose">
