@@ -3,18 +3,57 @@ import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
-import Time from "../components/Time.astro";
 import Header from "../components/Header.astro";
+import Time from "../components/Time.astro";
 import "../styles/global.css";
+import { formatIso } from "../utils/date";
 
 type Props = CollectionEntry<"event">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  startDate,
+  endDate,
+  venue,
+  heroImage,
+} = Astro.props;
+
+// MusicEvent is what earns event rich results in Google Search — the date,
+// venue and name are the fields it looks for.
+const eventSchema = {
+  "@type": "MusicEvent",
+  name: title,
+  description,
+  // formatIso keeps the local offset (2026-09-12T20:00:00+02:00) rather than
+  // normalising to UTC, so the advertised start time reads as the wall-clock
+  // time at the venue.
+  startDate: formatIso(startDate),
+  ...(endDate ? { endDate: formatIso(endDate) } : {}),
+  eventStatus: "https://schema.org/EventScheduled",
+  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+  location: {
+    "@type": "Place",
+    name: venue,
+    address: { "@type": "PostalAddress", addressCountry: "NO" },
+  },
+  organizer: { "@id": new URL("#organization", Astro.site).href },
+};
 ---
 
 <html lang="nb">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead
+      title={title}
+      description={description}
+      image={heroImage}
+      type="article"
+      publishedTime={pubDate}
+      modifiedTime={updatedDate}
+      schema={eventSchema}
+    />
   </head>
 
   <body>

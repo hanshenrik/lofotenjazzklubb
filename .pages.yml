@@ -1,8 +1,27 @@
+# A single media source, so the sidebar shows one "Bilder" entry covering the
+# whole image tree. Per-collection separation happens on the fields instead:
+# each image field sets `path` to its subfolder, which is where that field
+# starts browsing and where its uploads land.
+#
+# `input` is where files are stored in the repo; `output` is the prefix written
+# into the content file, replacing `input`. So an upload from the Aktuelt hero
+# field is stored at src/assets/images/blog/foo.jpg and written into the
+# frontmatter as ../../assets/images/blog/foo.jpg.
+#
+# That output is *relative* on purpose: the schemas use Astro's image() helper,
+# which resolves paths relative to the markdown file and rejects root-absolute
+# ones ("/blog/foo.png" fails the build with image-not-found). Every content
+# file sits exactly two levels below src/ (src/content/<collection>/<file>.mdx),
+# so ../../ resolves to src/.
+#
+# Going through src/assets rather than public/ is what buys the image pipeline:
+# hero images come out hashed and converted to WebP instead of being served at
+# whatever size they were uploaded.
 media:
   - name: images
     label: Bilder
     input: src/assets/images
-    output: /
+    output: ../../assets/images
     extensions: [png, jpg, jpeg, webp, svg, gif]
 
 content:
@@ -41,6 +60,7 @@ content:
       - name: updatedDate
         label: Oppdatert
         type: date
+        default: ""
         options:
           time: true
           format: yyyy-MM-dd HH:mm
@@ -48,8 +68,9 @@ content:
         label: Hovedbilde
         type: image
         options:
-          media: public-images
-          path: public
+          media: images
+          # Default browse/upload folder for this field, as a repo path.
+          path: src/assets/images/blog
           extensions: [png, jpg, jpeg, webp, svg, gif]
 
   - name: event
@@ -77,6 +98,27 @@ content:
         options:
           rows: 2
           maxLength: 150
+      - name: startDate
+        label: Starttidspunkt
+        type: date
+        required: true
+        options:
+          time: true
+          format: yyyy-MM-dd HH:mm
+      - name: endDate
+        label: Sluttidspunkt
+        type: date
+        default: ""
+        options:
+          time: true
+          format: yyyy-MM-dd HH:mm
+      - name: venue
+        label: Spillested
+        type: select
+        required: true
+        options:
+          creatable: true
+          values: [Arbeidern, Nordis, Trevarefabrikken, Kulturhuset]
       - name: pubDate
         label: Publiseringsdato
         type: date
@@ -95,6 +137,7 @@ content:
         type: image
         options:
           media: images
+          path: src/assets/images/event
           extensions: [png, jpg, jpeg, webp, svg, gif]
 
   # Single file rather than a collection: one editable page, not a list. The
@@ -122,6 +165,7 @@ content:
         options:
           format: markdown
           media: images
+          path: src/assets/images/page
           extensions: [png, jpg, jpeg, webp, svg, gif]
 
 settings:

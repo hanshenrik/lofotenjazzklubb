@@ -31,8 +31,8 @@ const event = defineCollection({
       pubDate: z.coerce.date(),
       updatedDate: z.coerce.date().optional(),
       startDate: z.coerce.date(),
-      venue: z.string(),
       endDate: z.coerce.date().optional(),
+      venue: z.string(),
       heroImage: z.optional(image()),
     }),
 });
