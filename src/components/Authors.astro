@@ -4,9 +4,10 @@ import { getCollection } from "astro:content";
 
 interface Props {
   authors?: string[];
+  size?: "sm" | "md";
 }
 
-const { authors } = Astro.props;
+const { authors, size } = Astro.props;
 
 // Load all authors once and filter by the provided file paths
 const allAuthors = authors?.length ? await getCollection("authors") : [];
@@ -31,7 +32,7 @@ const validAuthors = allAuthors.filter((a) =>
             <Image
               src={author.data.image}
               alt={author.data.name}
-              class="w-16 skew-x-6"
+              class:list={["skew-x-6", size === "sm" ? "w-8" : "w-16"]}
             />
           ) : (
             <div class="h-10 w-10 skew-x-6 bg-blue-200" />
