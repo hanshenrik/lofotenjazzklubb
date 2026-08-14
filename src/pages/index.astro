@@ -28,7 +28,7 @@ const events = (await getCollection("event")).sort(
               title={event.data.title}
               image={event.data.heroImage}
             >
-              <div slot="meta" class="flex flex-col md:flex-row">
+              <div slot="meta" class="flex flex-col md:flex-row md:gap-1">
                 <div class="flex items-center justify-start space-x-1 bg-blue-500 px-2 py-2 text-white group-hover:text-white md:bg-transparent md:px-0 md:pr-2 md:text-black md:group-hover:bg-blue-500">
                   <Icon
                     name="circum:calendar-date"
