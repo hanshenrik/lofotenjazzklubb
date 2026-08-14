@@ -9,10 +9,12 @@ import { defineConfig, fontProviders } from "astro/config";
 // https://astro.build/config
 export default defineConfig({
   // Everything canonical — Open Graph URLs, the sitemap, the RSS feed — is
-  // derived from this. It is still the placeholder from the starter template
-  // and MUST be set to the real domain before deploying, or every share card
-  // and sitemap entry will point at example.com.
-  site: "https://example.com",
+  // derived from this.
+  //
+  // No `base` is needed: the site is served at the root of an apex custom
+  // domain. A `base` would only be required on the default
+  // hanshenrik.github.io/lofotenjazzklubb project-page URL.
+  site: "https://lofotenjazzklubb.no",
   integrations: [
     mdx(),
     sitemap({
