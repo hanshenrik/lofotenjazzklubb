@@ -1,15 +1,17 @@
 ---
-interface Props {
-  variant: "big-blue" | "small-gray";
-}
+import type { HTMLAttributes } from "astro/types";
 
-const { variant } = Astro.props;
+type Props = HTMLAttributes<"hr"> & {
+  variant: "big-blue" | "small-gray";
+};
+
+const { variant, class: className } = Astro.props;
 ---
 
 {
   variant === "big-blue" ? (
-    <div class="h-1.5 w-full -skew-x-12 bg-blue-500" />
+    <div class:list={["h-1.5 w-full -skew-x-12 bg-blue-500", className]} />
   ) : (
-    <hr class="w-24 border-t border-gray-300" />
+    <hr class:list={["w-24 border-t border-gray-300", className]} />
   )
 }

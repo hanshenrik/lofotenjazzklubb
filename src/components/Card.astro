@@ -1,6 +1,7 @@
 ---
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
+import Link from "../components/Link.astro";
 
 /**
  * One entry in a listing — an event on the front page, a post under /aktuelt.
@@ -27,9 +28,11 @@ const { href, title, image } = Astro.props;
 ---
 
 <li>
-  <a
+  <Link
+    noUnderline
+    noHoverEffect
     href={href}
-    class="no-hover-effect group block no-underline hover:outline-4 hover:outline-offset-16 hover:outline-blue-700"
+    class="group block hover:outline-4 hover:outline-offset-16 hover:outline-blue-700"
   >
     {
       image ? (
@@ -52,5 +55,5 @@ const { href, title, image } = Astro.props;
 
       <slot />
     </div>
-  </a>
+  </Link>
 </li>

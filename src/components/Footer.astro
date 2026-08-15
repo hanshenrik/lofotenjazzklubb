@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import VippsQrImage from "../assets/images/lofoten-jazzklubb-vipps.jpg";
+import Link from "../components/Link.astro";
 
 const today = new Date();
 ---
@@ -32,14 +33,30 @@ const today = new Date();
         </div>
       </div>
     </div>
-    <div class="flex max-w-60 flex-col gap-2 md:items-end md:text-right">
-      <h2>Jazzklubb-sjappa</h2>
-      <Image
-        src={VippsQrImage}
-        alt="Vipps QR-kode Lofoten jazzklubb"
-        class="w-32 rounded-2xl"
-      />
-      <p>Her kan du kjøpe medlemsskap, t-skjorte og litt andre greier.</p>
+    <div class="space-y-8">
+      <div class="flex max-w-60 flex-col gap-2 md:items-end md:text-right">
+        <h2>Jazzklubb-sjappa</h2>
+        <Link
+          noUnderline
+          noHoverEffect
+          href="https://qr.vipps.no/vp/jDn_W6uaM"
+          external
+        >
+          <Image
+            src={VippsQrImage}
+            alt="Vipps QR-kode Lofoten jazzklubb"
+            class="w-32 rounded-2xl"
+          />
+        </Link>
+        <p>Her kan du kjøpe medlemsskap, t-skjorter og litt andre greier.</p>
+      </div>
+      <div class="md:text-right">
+        <Link
+          external
+          href="https://app.pagescms.org/lofoten-jazzklubb/lofotenjazzklubb.no/main/collection/event"
+          >Admin</Link
+        >
+      </div>
     </div>
   </div>
 </footer>

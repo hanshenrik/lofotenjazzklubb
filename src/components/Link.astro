@@ -3,14 +3,28 @@ import type { HTMLAttributes } from "astro/types";
 
 type Props = HTMLAttributes<"a"> & {
   external?: boolean;
+  noUnderline?: boolean;
+  noHoverEffect?: boolean;
 };
 
-const { href, class: className, external, ...props } = Astro.props;
+const {
+  href,
+  class: className,
+  external,
+  noUnderline,
+  noHoverEffect,
+  ...props
+} = Astro.props;
 ---
 
 <a
   href={href}
-  class:list={["link", className]}
+  class:list={[
+    "link",
+    className,
+    { "no-underline": noUnderline },
+    { "no-hover-effect": noHoverEffect },
+  ]}
   target={external ? "_blank" : undefined}
   rel={external ? "noopener noreferrer" : undefined}
   {...props}
