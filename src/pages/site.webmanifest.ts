@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+
 import {
   SITE_DESCRIPTION,
   SITE_LANG,

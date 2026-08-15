@@ -1,11 +1,13 @@
 ---
 import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
+
 import Card from "../../components/Card.astro";
 import Time from "../../components/Time.astro";
 import { SITE_DESCRIPTION } from "../../consts";
 import Layout from "../../layouts/Layout.astro";
 import { formatDate } from "../../utils/date";
+
 import "../../styles/global.css";
 
 const posts = (await getCollection("blog")).sort(

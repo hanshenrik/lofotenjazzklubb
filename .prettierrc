@@ -4,8 +4,6 @@
     "prettier-plugin-astro",
     "prettier-plugin-tailwindcss"
   ],
-  "tailwindStylesheet": "./src/styles/global.css",
-  "tailwindAttributes": ["class:list"],
   "overrides": [
     {
       "files": "*.astro",
@@ -13,5 +11,6 @@
         "parser": "astro"
       }
     }
-  ]
+  ],
+  "importOrder": ["<BUILTIN_MODULES>", "", "<THIRD_PARTY_MODULES>", "", "^[.]"]
 }

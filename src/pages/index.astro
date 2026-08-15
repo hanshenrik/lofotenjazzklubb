@@ -3,13 +3,16 @@ import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { isFuture } from "date-fns";
+
 import Card from "../components/Card.astro";
 import Divider from "../components/Divider.astro";
 import Time from "../components/Time.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import Layout from "../layouts/Layout.astro";
 import { formatDate, formatWeekdayDateTime } from "../utils/date";
+
 import "../styles/global.css";
+
 import LogoImage from "../assets/images/lofoten-jazzklubb.png";
 
 const events = (await getCollection("event"))

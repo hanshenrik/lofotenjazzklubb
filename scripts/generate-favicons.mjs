@@ -10,6 +10,7 @@
  * one in as SOURCE and everything below regenerates from it.
  */
 import { mkdir } from "node:fs/promises";
+
 import sharp from "sharp";
 
 const SOURCE = "src/assets/images/lofoten-jazzklubb.png";
