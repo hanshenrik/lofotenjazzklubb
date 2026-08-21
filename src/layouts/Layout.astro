@@ -34,18 +34,18 @@ type Props = ComponentProps<typeof BaseHead>;
     </main>
     <Footer />
     <script is:inline>
-      document.addEventListener('DOMContentLoaded', function() {
-        const typewriters = document.querySelectorAll('.typewriter-text');
-        typewriters.forEach(function(container) {
+      document.addEventListener("DOMContentLoaded", function () {
+        const typewriters = document.querySelectorAll(".typewriter-text");
+        typewriters.forEach(function (container) {
           const fullText = container.dataset.text;
-          const hasCursor = container.dataset.cursor === 'true';
+          const hasCursor = container.dataset.cursor === "true";
 
           // Hide the fallback text first
-          container.classList.add('js-animating');
+          container.classList.add("js-animating");
           // Clear the initial text
-          container.textContent = '';
+          container.textContent = "";
           // Remove the hiding class so typed text is visible
-          container.classList.remove('js-animating');
+          container.classList.remove("js-animating");
 
           let i = 0;
 
@@ -55,8 +55,8 @@ type Props = ComponentProps<typeof BaseHead>;
               i++;
               setTimeout(typeWriter, 50);
             } else if (hasCursor) {
-              const cursorSpan = document.createElement('span');
-              cursorSpan.className = 'typewriter-cursor';
+              const cursorSpan = document.createElement("span");
+              cursorSpan.className = "typewriter-cursor";
               container.appendChild(cursorSpan);
             }
           }
