@@ -5,6 +5,7 @@ import type { CollectionEntry } from "astro:content";
 import Authors from "../components/Authors.astro";
 import Divider from "../components/Divider.astro";
 import PublishDate from "../components/PublishDate.astro";
+import Typewriter from "../components/Typewriter.astro";
 import Layout from "./Layout.astro";
 
 import "../styles/global.css";
@@ -28,7 +29,7 @@ const { title, description, pubDate, updatedDate, heroImage, authors } =
       {heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
     </div>
     <div class="space-y-4">
-      <h1>{title}</h1>
+      <h1><Typewriter text={title} /></h1>
       <p>{description}</p>
       <Divider variant="small-gray" />
       <div class="space-y-2">
