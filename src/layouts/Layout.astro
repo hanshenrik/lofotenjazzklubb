@@ -21,11 +21,6 @@ type Props = ComponentProps<typeof BaseHead>;
 <html lang="nb" class="no-js">
   <head>
     <BaseHead {...Astro.props} />
-    <style>
-      .no-js .typewriter-text:after {
-        content: attr(data-text);
-      }
-    </style>
   </head>
   <body class="flex min-h-dvh flex-col">
     <Header />
@@ -33,20 +28,17 @@ type Props = ComponentProps<typeof BaseHead>;
       <slot />
     </main>
     <Footer />
+
     <script is:inline>
+      // Remove no-js class and add js class to html element
+      document.documentElement.classList.remove("no-js");
+      document.documentElement.classList.add("js");
+
+      // Initialize typewriter animations
       document.addEventListener("DOMContentLoaded", function () {
         const typewriters = document.querySelectorAll(".typewriter-text");
         typewriters.forEach(function (container) {
           const fullText = container.dataset.text;
-          const hasCursor = container.dataset.cursor === "true";
-
-          // Hide the fallback text first
-          container.classList.add("js-animating");
-          // Clear the initial text
-          container.textContent = "";
-          // Remove the hiding class so typed text is visible
-          container.classList.remove("js-animating");
-
           let i = 0;
 
           function typeWriter() {
@@ -54,10 +46,6 @@ type Props = ComponentProps<typeof BaseHead>;
               container.textContent = fullText.substring(0, i + 1);
               i++;
               setTimeout(typeWriter, 50);
-            } else if (hasCursor) {
-              const cursorSpan = document.createElement("span");
-              cursorSpan.className = "typewriter-cursor";
-              container.appendChild(cursorSpan);
             }
           }
 

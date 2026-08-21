@@ -1,47 +1,10 @@
 ---
 interface Props {
   text: string;
-  cursor?: boolean;
   class?: string;
 }
 
-const { text, cursor = true, class: className } = Astro.props;
+const { text, class: className } = Astro.props;
 ---
 
-<style>
-  .typewriter-text {
-    display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  .typewriter-text.js-animating {
-    visibility: hidden;
-  }
-
-  .typewriter-cursor {
-    display: inline-block;
-    width: 2px;
-    height: 1em;
-    background-color: currentColor;
-    margin-left: 2px;
-    opacity: 1;
-    animation: blink 0.8s step-end infinite;
-  }
-
-  @keyframes blink {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
-  }
-</style>
-
-<span
-  class={`typewriter-text ${className ?? ""}`}
-  data-text={text}
-  data-cursor={cursor}>{text}</span
->
+<span class={`typewriter-text ${className ?? ""}`} data-text={text}></span>

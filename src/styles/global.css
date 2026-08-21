@@ -215,3 +215,20 @@ a:not(.no-hover-effect).no-underline:focus {
   --text-2xs: 0.625rem;
   --text-2xs--line-height: 0.75rem;
 }
+
+/* Typewriter animation styles */
+.typewriter-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  visibility: hidden;
+}
+
+.js .typewriter-text {
+  visibility: visible;
+}
+
+.no-js .typewriter-text:after {
+  content: attr(data-text);
+  visibility: visible;
+}
